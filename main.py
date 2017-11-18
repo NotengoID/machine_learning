@@ -20,15 +20,13 @@
 
 import os
 #import numpy as np
-import cv2
+import ocrdni
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = '/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -52,12 +50,11 @@ def upload_file():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        image = cv2.imread('/static/images/up.png',0)
         height = '1' #str(cv2.IMREAD_UNCHANGED)
-        width = 'wi'
+        width = 'wi' + ocrdni.leerImagenDeRequest(file)
         #height, width = file.shape[:2]
         #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return render_template('submitted_form.html',
-        	name=filename,
-        	height=height,
-        	width=width)
+            name=filename,
+            height=height,
+            width=width)
