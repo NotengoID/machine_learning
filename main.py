@@ -50,11 +50,14 @@ def upload_file():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        height = '1' #str(cv2.IMREAD_UNCHANGED)
-        width = 'wi' + ocrdni.leerImagenDeRequest(file)
-        #height, width = file.shape[:2]
+        datos = ocrdni.leerImagenDeRequest(file)
         #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return render_template('submitted_form.html',
-            name=filename,
-            height=height,
-            width=width)
+            dni='x', #datos[0],
+            nombre='x', #datos[1],
+            primer_apellido=datos[2],
+            segundo_apellido='x', #datos[3],
+            sexo='x', #datos[4],
+            estado='x', #datos[5],
+            fecha_nac='x', #datos[6],
+            direccion='x')
