@@ -8,6 +8,8 @@ def leerImagenDeRequest(infile=None):
     datos = []
 
     img = leerImagen(infile)
+    filename = "{}.png".format(os.getpid())
+    cv2.imwrite(filename, img)
     img_pre = preProcesarImagen(img)
 
     for n, xr, yr, wr, hr in getRegiones():
@@ -18,8 +20,9 @@ def leerImagenDeRequest(infile=None):
 
 def leerImagen(infile):
     if infile is None:
-        with open(getAbsPath('test/test0002.png'), 'rb') as infile:
-            file = infile.read()
+        with open(getAbsPath('test/test0002.png'), 'rb') as infile2:
+            print 'aca'
+            file = infile2.read()
     else:
         file = infile.read()
         infile.close()
@@ -80,4 +83,4 @@ def getDato(region):
     #print dato
     return dato
 
-#per = leerImagenDeRequest()
+#per = leerImagenDeRequest(None)
