@@ -4,10 +4,10 @@ import cv2
 
 path = os.path.dirname(os.path.realpath('__file__'))
 
-def leerImagenDeRequest(file=None):
+def leerImagenDeRequest(infile=None):
     datos = []
 
-    img = leerImagen(file)
+    img = leerImagen(infile)
     img_pre = preProcesarImagen(img)
 
     for n, xr, yr, wr, hr in getRegiones():
@@ -16,10 +16,13 @@ def leerImagenDeRequest(file=None):
 
     return datos
 
-def leerImagen(file):
-    if (file is None):
+def leerImagen(infile):
+    if infile is None:
         with open(getAbsPath('test/test0002.png'), 'rb') as infile:
             file = infile.read()
+    else:
+        file = infile.read()
+        infile.close()
 
     file = np.fromstring(file, dtype='uint8')
     return cv2.imdecode(file, cv2.IMREAD_UNCHANGED)
