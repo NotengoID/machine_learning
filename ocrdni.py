@@ -8,8 +8,9 @@ def leerImagenDeRequest(infile=None):
     datos = []
 
     img = leerImagen(infile)
-    filename = "{}.png".format(os.getpid())
-    cv2.imwrite(filename, img)
+    #debug
+    #filename = "{}.png".format(os.getpid())
+    #cv2.imwrite(filename, img)
     img_pre = preProcesarImagen(img)
 
     for n, xr, yr, wr, hr in getRegiones():
@@ -20,8 +21,7 @@ def leerImagenDeRequest(infile=None):
 
 def leerImagen(infile):
     if infile is None:
-        with open(getAbsPath('test/test0002.png'), 'rb') as infile2:
-            print 'aca'
+        with open(getAbsPath('17423.png'), 'rb') as infile2:
             file = infile2.read()
     else:
         file = infile.read()
@@ -38,13 +38,14 @@ def getRegiones():
     x1 = 281 * 2
     h1 = 50 * 2
     h2 = 44 * 2
+    regiones.append(['dni', 120, 300, 300, 66])
+    regiones.append(['prenombres', x1, 252 * 2, 184 * 2, h1])
     regiones.append(['primer apellido', x1, 121 * 2, 141 * 2, h1])
     regiones.append(['segundo apellido', x1, 187 * 2, 310, h1])
-    regiones.append(['prenombres', x1, 252 * 2, 184 * 2, h1])
     regiones.append(['sexo', x1, 322 * 2, 144 * 2, h2])
     regiones.append(['estado civil', 469 * 2, 322 * 2, 141 * 2, h2])
     regiones.append(['fecha de nacimiento', x1, 368 * 2, 141 * 2, h2])
-    regiones.append(['dni', 120, 300, 300, 66])
+
     return regiones
 
 
@@ -65,7 +66,7 @@ def getModelos():
 def getDato(region):
     dato = ''
     letras = []
-    regionx = region
+    #regionx = region
     for letter, color, model in getModelos():
         for (x, y, w, h) in model.detectMultiScale(region):
             # print letter+'-'+str(x)+','+str(y)+'-'+str(w)+','+str(h)
@@ -80,7 +81,9 @@ def getDato(region):
     letras = sorted(letras, key=lambda letra: letra[1])
     for letra in letras:
         dato+=letra[0]
-    #print dato
+
     return dato
 
+
 #per = leerImagenDeRequest(None)
+#print per
