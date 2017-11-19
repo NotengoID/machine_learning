@@ -4,10 +4,11 @@ import cv2
 
 path = os.path.dirname(os.path.realpath('__file__'))
 
-def leerImagenDeRequest(file):
+def leerImagenDeRequest(infile):
 
-#    with open(getAbsPath('test/test0002.png'), 'rb') as infile:
-#        buf = infile.read()
+    #with open(getAbsPath('test/test0002.png'), 'rb') as infile:
+    file = infile.read()
+    infile.close()
 #        
     # CV2
     file = np.fromstring(file, dtype='uint8')
