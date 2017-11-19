@@ -8,9 +8,9 @@ def leerImagenDeRequest(file):
 
 #    with open(getAbsPath('test/test0002.png'), 'rb') as infile:
 #        buf = infile.read()
-#        file = np.fromstring(buf, dtype='uint8')
-
+#        
     # CV2
+    file = np.fromstring(file, dtype='uint8')
     img = cv2.imdecode(file, cv2.IMREAD_UNCHANGED)
     img_pre = preProcesarImagen(img)
 
@@ -61,4 +61,4 @@ def getModelos():
     #modelos.append(['E', (255, 100, 100), cv2.CascadeClassifier(getAbsPath('model/ml_E/cascade.xml'))])
     return modelos
 
-leerImagenDeRequest(1)
+#leerImagenDeRequest(1)
