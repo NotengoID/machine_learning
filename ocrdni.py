@@ -21,7 +21,7 @@ def leerImagenDeRequest(infile=None):
 
 def leerImagen(infile):
     if infile is None:
-        with open(getAbsPath('17423.png'), 'rb') as infile2:
+        with open(getAbsPath('test/test0002.png'), 'rb') as infile2:
             file = infile2.read()
     else:
         file = infile.read()
@@ -83,7 +83,6 @@ def getDato(region):
         dato+=letra[0]
 
     return dato
-
 
 #per = leerImagenDeRequest(None)
 #print per
